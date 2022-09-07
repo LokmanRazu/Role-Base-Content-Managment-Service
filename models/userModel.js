@@ -19,7 +19,7 @@ const userSchema = new Schema({
         minlength:4,
         required:true
     },
-    reSetOTPorToken:String,
+    resetOTPorToken:String,
     role:{
         type:Schema.Types.ObjectId,
         ref:'Role'
