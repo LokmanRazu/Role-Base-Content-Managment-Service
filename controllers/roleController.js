@@ -1,1 +1,1 @@
-const Role = require('../models/userRoleModels');
+const Role = require('../models/userRoleModels')
