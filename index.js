@@ -6,10 +6,12 @@ const app = express();
 app.use(express.json())
 //    Router
 const userRoutes = require('./routers/userRoutes')
+const userAuthRoutes = require('./routers/userAuthRoutes')
 
 
 
 app.use('/api/v1/users',userRoutes);
+app.use('/api/v1/userAuth',userAuthRoutes)
 
 
 app.all('*',(req,res,next)=>{
@@ -22,7 +24,6 @@ app.all('*',(req,res,next)=>{
 
 
 const db = process.env.DATABASE.replace('<password>',process.env.PASSWORD);
-console.log(db);
 mongoose.connect(db,{
     useNewUrlParser:true              
 })

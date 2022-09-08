@@ -63,12 +63,19 @@ exports.cerateUser =async (req,res,next)=>{
 
 exports.updateUser = async (req,res,next)=>{
     try{
-        const updateUser = await User.findOneAndUpdate(req.params.id,req.body,{new:true})
-    
+        let user = await User.findOne({email: req.body.email});
+        if(!user){
+            throw new Error('User not found')
+        }
+        let { password } = req.body;
+        password = bcrypt.hashSync(password,11);
+         user.password=password
+         await user.save()
+        console.log(req.body, password)
         res.status(200).json({
             status:'SUCCESS',
             data:{
-            updateUser
+            user
             }
         });
     
@@ -77,4 +84,21 @@ exports.updateUser = async (req,res,next)=>{
         console.log(`I am from UpdateUser and Error is : ${e}`)
         next(e)
       }  
+    };
+
+    exports.deleteUser = async (req,res,next)=>{
+        try{
+            const deleteUser = await User.findByIdAndDelete(req.params.id);
+    
+            res.status(200).json({
+                status:'SUCCESS',
+                data:{
+               deleteUser
+                }
+            })
+    
+        }catch(e){
+            console.log(`I am from DeleteUser and Error is : ${e}`)
+            next(e)
+        }
     };

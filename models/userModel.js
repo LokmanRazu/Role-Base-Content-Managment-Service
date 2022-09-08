@@ -22,7 +22,8 @@ const userSchema = new Schema({
     resetOTPorToken:String,
     role:{
         type:Schema.Types.ObjectId,
-        ref:'Role'
+        ref:'Role',
+        required:true
     }
 
 },{timestamps:true})
