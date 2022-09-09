@@ -1,5 +1,6 @@
-const { timeStamp } = require('console')
+
 const { model, Schema } = require('mongoose')
+const role = require('./userRoleModels')
 
 const userSchema = new Schema({
     name:{
@@ -22,11 +23,18 @@ const userSchema = new Schema({
     resetOTPorToken:String,
     role:{
         type:Schema.Types.ObjectId,
-        ref:'Role',
+        ref:role,
         required:true
     }
 
 },{timestamps:true})
+
+userSchema.pre(/^find/, function(){
+    this.populate({
+        path:'role',
+        select:'title'
+    })
+})
 
 const User = model('User',userSchema);
 module.exports = User;

@@ -5,13 +5,15 @@ dotenv.config({path:'./config.env'});
 const app = express();
 app.use(express.json())
 //    Router
-const userRoutes = require('./routers/userRoutes')
-const userAuthRoutes = require('./routers/userAuthRoutes')
+const userRoutes = require('./routers/userRoutes');
+const userAuthRoutes = require('./routers/userAuthRoutes');
+const userRoleRoutes = require('./routers/roleRouters')
 
 
 
 app.use('/api/v1/users',userRoutes);
 app.use('/api/v1/userAuth',userAuthRoutes)
+app.use('/api/v1/roles',userRoleRoutes);
 
 
 app.all('*',(req,res,next)=>{

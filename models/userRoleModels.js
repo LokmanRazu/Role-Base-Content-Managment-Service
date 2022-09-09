@@ -7,8 +7,7 @@ const roleSchema = new Schema({
         trim:true
     },
     value:{
-        type:String,
-        required:true
+        type:String
     }
 });
 
