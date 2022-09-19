@@ -7,7 +7,7 @@ class ApiFeatures{
     filter(){
         //  Matching Query Will be Delete from the 'queryObj' and Unmatched Query will be the main Query object 'queryobj'
         let queryObj = { ...this.queryString };
-        const excludeFildes = ['page','sort','limit','fildes']   // Viseos Ref = 96
+        const excludeFildes = ['page','sort','limit','fildes']   // Video Ref = 96
         excludeFildes.forEach(e => delete queryObj[e])
 
     //  ADVANCED FILTERING

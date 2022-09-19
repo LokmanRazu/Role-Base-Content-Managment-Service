@@ -1,0 +1,8 @@
+let chars = [1,2,3,4,4,5,5,6,6];
+
+let uniqueChars = chars.filter((c, index) => {
+    return chars.indexOf(c) === index;
+});
+
+console.log(uniqueChars);
+
