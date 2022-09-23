@@ -1,7 +1,0 @@
-const router = require('express').Router();
-
-const { userLogIn } = require('../controllers/UserAuthController');
-
-router.post('/',userLogIn)
-
-module.exports = router
