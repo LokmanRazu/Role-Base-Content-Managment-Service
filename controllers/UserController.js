@@ -1,5 +1,6 @@
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
+const ApiFeatures = require('../utils/APIFeature')
 
 exports.getSingleUser =async (req,res,next)=>{
      try{
@@ -19,7 +20,8 @@ exports.getSingleUser =async (req,res,next)=>{
 
 exports.getAllUser =async (req,res,next)=>{
     try{
-       const user = await User.find();
+        const feature = new ApiFeatures(User.find(),req.query).filter().sort().limitFields().paginate();
+       const user = await feature.query
        res.status(200).json({
            status:'SUCCESS',
            data:{

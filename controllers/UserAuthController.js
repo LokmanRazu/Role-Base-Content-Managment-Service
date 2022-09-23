@@ -35,3 +35,7 @@ exports.userLogIn = async (req,res,next)=>{
         next(e)
     }
 }
+
+exports.forgetPassword = (req,res,next)=>{
+    
+}
