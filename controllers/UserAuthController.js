@@ -1,8 +1,8 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const sendMail = require('../utils/email');
-const crypto = require('crypto')
+const sendMail = require("../utils/email");
+const crypto = require("crypto");
 
 exports.userLogIn = async (req, res, next) => {
   const { email, password } = req.body;
@@ -73,6 +73,41 @@ exports.forgetPassword = async (req, res, next) => {
     }
   } catch (e) {
     console.log(`I am from Forget Password and Error is : ${e}`);
+    next(e);
+  }
+};
+
+exports.resetPassword = async (req, res, next) => {
+  try {
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(req.params.token)
+      .digest("hex");
+    console.log("hashedToken: ", hashedToken);
+    const user = await User.findOne({
+      PasswordResetToken: hashedToken,
+      passwordResetExpires: { $gt: Date.now() },
+    });
+    console.log("user :", user);
+    if (!user) return next();
+    user.password = req.body.password;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    const newUser = await user.save();
+    console.log("newuser :", newUser);
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+    console.log("token: ", token);
+    res.status(200).json({
+      status: "sucsess",
+      data: {
+        token,
+      },
+    });
+  } catch (e) {
+    console.log(`I am from Reset Password and Error is : ${e}`);
     next(e);
   }
 };
