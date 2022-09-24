@@ -104,7 +104,7 @@ exports.resetPassword = async (req, res, next) => {
       status: "sucsess",
       data: {
         token,
-      },
+      }
     });
   } catch (e) {
     console.log(`I am from Reset Password and Error is : ${e}`);

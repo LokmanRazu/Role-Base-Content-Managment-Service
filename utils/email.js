@@ -21,7 +21,7 @@ const sendMail =async options =>{
         // html
     };
 
-    // 3. Actully send the mail
+    // 3. Actully send the mail .
     await transporter.sendMail(mailOptions);
 };
 
