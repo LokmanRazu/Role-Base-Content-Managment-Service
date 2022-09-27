@@ -34,7 +34,6 @@ res.status(err.statusCode).json({
 });
 
 
-
 const db = process.env.DATABASE.replace('<password>',process.env.PASSWORD);
 mongoose.connect(db,{
     useNewUrlParser:true              
@@ -45,5 +44,5 @@ mongoose.connect(db,{
 
 const PORT = 8000;
 app.listen(PORT,()=>{
-    console.log(`app is running in ${PORT}`);
+    console.log(`app is running in ${PORT}`)
 });
