@@ -37,7 +37,7 @@ const userSchema = new Schema(
 userSchema.pre(/^find/, function () {
   this.populate({
     path: "role",
-    select: "title",
+    select: "title value",
   });
 });
 

@@ -6,9 +6,7 @@ const roleSchema = new Schema({
         required:true,
         trim:true
     },
-    value:{
-        type:String
-    }
+    value:String
 });
 
 roleSchema.pre('save', function(){
